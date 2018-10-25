@@ -13,16 +13,7 @@
           <!--列表导航-->
           <div class="header_scroll">
             <ul class="header_list">
-              <li>居家</li>
-              <li>配件</li>
-              <li>服装</li>
-              <li>电器</li>
-              <li>洗护</li>
-              <li>饮食</li>
-              <li>餐厨</li>
-              <li>婴童</li>
-              <li>文体</li>
-              <li>特色</li>
+              <li  v-for="(item,index) in data" :key="index">{{item.name}}</li>
             </ul>
           </div>
         </div>
@@ -30,20 +21,8 @@
           <!--轮播图-->
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <a href="javascript: ;">
-                  <img src="https://yanxuan.nosdn.127.net/c1c1bc4fc889ed1bbb662de6927c0324.jpg" alt="">
-                </a>
-              </div>
-              <div class="swiper-slide">
-                <a href="javascript: ;">
-                  <img src="https://yanxuan.nosdn.127.net/141d4d8bf003475fdade1f3aa3063f02.jpg" alt="">
-                </a>
-              </div>
-              <div class="swiper-slide">
-                <a href="javascript: ;">
-                  <img src="https://yanxuan.nosdn.127.net/c597e2714c71360b46ff1d3778cb2ec6.jpg" alt="">
-                </a>
+              <div class="swiper-slide" v-for="(item,index) in banner" :key="index">
+                  <img v-lazy="item.picUrl" />
               </div>
             </div>
             <!-- 如果需要分页器 -->
@@ -51,17 +30,9 @@
           </div>
           <!--轮播图下面小导航-->
           <div class="home_smallList">
-            <div class="smallList_item">
-              <img src="http://yanxuan.nosdn.127.net/cae45612b8aae577d8bd73338e2fc02c.png">
-              <span>网易自营品牌</span>
-            </div>
-            <div  class="smallList_item">
-              <img src="http://yanxuan.nosdn.127.net/cae45612b8aae577d8bd73338e2fc02c.png">
-              <span>30天无忧退货</span>
-            </div>
-            <div  class="smallList_item">
-              <img src="http://yanxuan.nosdn.127.net/cae45612b8aae577d8bd73338e2fc02c.png">
-              <span>48小时快速退款</span>
+            <div class="smallList_item" v-for="(item,index) in home.policyDescList" :key="index">
+              <img v-lazy="item.icon">
+              <span>{{item.desc}}</span>
             </div>
           </div>
         </div>
@@ -72,21 +43,13 @@
             <i class="iconfont icon-right-circle"></i>
           </div>
           <div class="home_list_maker">
-            <div class="maker_item">
-              <h4>CK制造商</h4>
-              <div>25元起</div>
-            </div>
-            <div  class="maker_item">
-              <h4>Nine West制造商</h4>
-              <div>199元起</div>
-            </div>
-            <div  class="maker_item">
-              <h4>新秀丽制造商</h4>
-              <div>49元起</div>
-            </div>
-            <div  class="maker_item">
-              <h4>Birkenstock集团制造商</h4>
-              <div>89.9元起</div>
+            <div class="maker_item"  v-for="(item,index) in getHomeTag" :key="index">
+              <img v-lazy="item.picUrl" alt="">
+              <div class="maker_item_test">
+                <h4>{{item.name}}</h4>
+                <div>{{item.floorPrice}}元起</div>
+                <i></i>
+              </div>
             </div>
           </div>
         </div>
@@ -98,29 +61,11 @@
           </div>
           <div class="home_newList_content">
             <ul class="content_list">
-              <li>
-                <img src="http://yanxuan.nosdn.127.net/969d44f72fa4453b0ccc71799ec83335.png" alt="小龙虾">
-                <div class="list_title">小龙虾 4-6钱 1千克/盒 （800克虾+200克汤）</div>
-                <div class="list_content">夏季爆品，媲美现煮</div>
-                <div class="list_price">98￥</div>
-              </li>
-              <li>
-                <img src="http://yanxuan.nosdn.127.net/1f12ef5d66879785a292c422647015e0.jpg" alt="小龙虾">
-                <div class="list_title">冰激凌夏日女式墨镜</div>
-                <div class="list_content">轻奢透粉质感，偏光镜片呵护双眼</div>
-                <div class="list_price">229￥</div>
-              </li>
-              <li>
-                <img src="http://yanxuan.nosdn.127.net/bd2842f9eda908dae2d71f980eeb282e.png" alt="小龙虾">
-                <div class="list_title">马来西亚直采 椰子水 330毫升*12瓶</div>
-                <div class="list_content">非浓缩还原，低卡零脂肪</div>
-                <div class="list_price">98￥</div>
-              </li>
-              <li>
-                <img src="http://yanxuan.nosdn.127.net/d85f53454944f798e412d74a6350b9e3.png" alt="小龙虾">
-                <div class="list_title">冬夏两用 护脊椰棕弹簧床垫</div>
-                <div class="list_content">硬度偏好者、青少年及老人优选</div>
-                <div class="list_price">2099￥</div>
+              <li v-for="(item,index) in home.newItemList" :key="index">
+                <img v-lazy="item.listPicUrl" alt="小龙虾">
+                <div class="list_title">{{item.name}}</div>
+                <div class="list_content">{{item.simpleDesc}}</div>
+                <div class="list_price">{{item.retailPrice}}￥</div>
               </li>
             </ul>
           </div>
@@ -137,73 +82,45 @@
             </div>
             <div class="home_special_smallList">
               <ul class="smallList_items">
-                <li>
-                  <img src="https://yanxuan.nosdn.127.net/22c06cba5722e5fd0e9561cf5b7b1800.jpg" alt="">
-                  <div class="items_title">给毛孔来一次深度清洁</div>
-                  <div class="items_price">107.1元起</div>
-                  <div class="items_content">硅胶洁面仪，洗出会发光的素颜肌</div>
-                </li>
-                <li>
-                  <img src="https://yanxuan.nosdn.127.net/1f8ac0ae8bf3e4fe8044192c38b9c1c6.jpg" alt="">
-                  <div class="items_title">夏日厨房清新法则</div>
-                  <div class="items_price">7.9元起</div>
-                  <div class="items_content">去除油腻的厨房清洁妙招</div>
-                </li>
-                <li>
-                  <img src="https://yanxuan.nosdn.127.net/acb59e68201beaaee839d42733332c26.jpg" alt="">
-                  <div class="items_title">行李箱太好用，天天盼出行</div>
-                  <div class="items_price">249元起</div>
-                  <div class="items_content">暑假出行必备行李箱、登机箱推荐</div>
+                <li v-for="(item,index) in home.topicList" :key="index">
+                  <img v-lazy="item.itemPicUrl" alt="">
+                  <div class="items_title">{{item.title}}</div>
+                  <div class="items_price">{{item.priceInfo}}元起</div>
+                  <div class="items_content">{{item.subtitle}}</div>
                 </li>
               </ul>
             </div>
           </div>
         <!--回到顶部-->
-        <span class="home_icon">
-          <i class="iconfont icon-heart-fill"></i>
-        </span>
+        <GoToTop/>
         <!--首页底部列表-->
         <div class="home_footer_list">
-          <div class="footer_title">
-            <div>居家好物</div>
-          </div>
-          <div class="footer_list">
-            <div class="footer_list_items">
-              <img src="http://yanxuan.nosdn.127.net/1059f517cd4a529fcc3f9299f5173bef.png" alt="">
-              <div class="footer_list_title">宽细夹排，升级爽滑凉感</div>
-              <div class="footer_list_content">天然宽篾头层青碳化竹凉席</div>
-              <span class="footer_list_price">279￥</span>
+          <div v-for="(item,index) in home.cateList" :key="index">
+            <div class="footer_title">
+              <div>{{item.name}}好物</div>
             </div>
-            <div class="footer_list_items">
-              <img src="http://yanxuan.nosdn.127.net/2b6e2268ed712f1a336283f013abb7a1.png" alt="">
-              <div class="footer_list_title">细篾整密，凉滑不夹肉</div>
-              <div class="footer_list_content">平滑细篾头层青碳化竹凉席</div>
-              <span class="footer_list_price">259￥</span>
-            </div>
-            <div class="footer_list_items">
-              <img src="http://yanxuan.nosdn.127.net/76e5c820f6bb71a26517ffa01f499871.png" alt="">
-              <div class="footer_list_title">花语：相守是一种承诺</div>
-              <div class="footer_list_content">海洋之心永生花</div>
-              <span class="footer_list_price">299￥</span>
-            </div>
-            <div class="footer_list_items">
-              <img src="http://yanxuan.nosdn.127.net/f88c3dc42f3e4d7da1ded8c1ee6a97ba.png" alt="">
-              <div class="footer_list_title">花语：永远的爱</div>
-              <div class="footer_list_content">怦然心动永生花</div>
-              <span class="footer_list_price">439￥</span>
+            <div class="footer_list">
+              <div class="footer_list_items" v-for="(itemGoods,index) in item.itemList" :key="index">
+                <img v-lazy="itemGoods.listPicUrl" alt="">
+                <div class="footer_list_title">{{itemGoods.simpleDesc}}</div>
+                <div class="footer_list_content">{{itemGoods.name}}</div>
+                <span class="footer_list_price">{{itemGoods.retailPrice}}￥</span>
+              </div>
             </div>
           </div>
         </div>
         <!--底部-->
-        <div>
-          <div>
-            <div>下载APP</div>
-            <div>电脑板</div>
-          </div>
-          <div>
-            <soan>网易公司版权所有 © 1997-</soan>
-            <span>2018</span>
-            <div>食品经营许可证：JY13301080111719</div>
+        <div class="home_footer">
+          <div class="footer_lists">
+            <div class="footer_items">
+              <div class="footer_items_app">下载APP</div>
+              <div class="footer_items_comp">电脑板</div>
+            </div>
+            <div class="footer_since">
+              <span>网易公司版权所有 © 1997-</span>
+              <span>2018</span>
+              <div>食品经营许可证：JY13301080111719</div>
+            </div>
           </div>
         </div>
       </div>
@@ -211,9 +128,11 @@
 
 <script>
 
+  import {mapState,mapGetters} from 'vuex'
   import BScroll from 'better-scroll'
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+  import GoToTop from '../../components/GoToTop/GoToTop'
   export default {
         data() {
             return {
@@ -222,6 +141,14 @@
         },
 
       mounted () {
+
+          this.$store.dispatch('getData')
+          this.$store.dispatch('getHome')
+          this.$store.dispatch('getBanner',() => {
+              this.$nextTick(() => {
+                this.swiper()
+              })
+          })
 
        new BScroll('.header_scroll',{
           scrollX: true,
@@ -238,20 +165,35 @@
           click: true
         })
 
-        new Swiper('.swiper-container', {
 
-          centeredSlides: true,
-          autoplay:true,
 
-          pagination: {
-            el: '.swiper-pagination'
-          },
+      },
 
-          loop:true
-        })
+      computed: {
+        ...mapState(['data','home','banner']),
+        ...mapGetters(['getHomeTag'])
+      },
 
-      }
+      methods: {
+        //轮播图
+        swiper() {
+          new Swiper('.swiper-container', {
 
+            centeredSlides: true,
+            autoplay: true,
+
+            pagination: {
+              el: '.swiper-pagination'
+            },
+
+            loop: true
+          })
+        }
+      },
+
+    components: {
+      GoToTop
+    }
 
     }
 </script>
@@ -260,7 +202,6 @@
 @import "../../common/stylus/mixins.styl"
   .home_container
     width 10rem
-    height 10000px
     .home_header
       width 100%
       height (148/$rem)
@@ -316,9 +257,9 @@
     .home_header_content
       margin-bottom (30/$rem)
       .swiper-slide
-        width (400/$rem)
+        width 100%
+        height (400/$rem)
         padding-top 20px
-
         img
           width 100%
           height 100%
@@ -359,7 +300,6 @@
           margin-left 10px
           font-size 35px
           color #333
-
       .home_list_maker
         width 100%
         .maker_item
@@ -370,22 +310,25 @@
           background #f4f4f4
           padding 18px
           margin-bottom 15px
-          &:nth-child(1)
-            background-image url("//yanxuan.nosdn.127.net/bcca932aeb9d818dcf6d3a4804f7311b.png")
-            background-size 100%
-            margin-left 10px
-          &:nth-child(2)
-            background-image url("//yanxuan.nosdn.127.net/dd604acce92e61616a0fa2498cf0fd35.png")
-            background-size 100%
-            margin-left 15px
-          &:nth-child(3)
-            background-image url("//yanxuan.nosdn.127.net/f57d460dde6e737f2bacd9f67cb73a41.png")
-            background-size 100%
-            margin-left 10px
-          &:nth-child(4)
-            background-image url("//yanxuan.nosdn.127.net/52aa744559c6fc951e63f98229f36367.png")
-            background-size 100%
-            margin-left 15px
+          position relative
+          margin-left (13/$rem)
+          img
+            width 100%
+            height 100%
+          .maker_item_test
+            position: absolute
+            top 0
+            left 0
+            z-index 10
+            padding (20/$rem) 0 0 (20/$rem)
+            h4
+              margin-bottom (20/$rem)
+            i
+              display block
+              height (32/$rem)
+              margin-top (20/$rem)
+              background-image url("//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/new-5e42f2db1f.png")
+              background-repeat no-repeat
 
     .home_newList
       width 100%
@@ -465,8 +408,9 @@
 
       .home_special_smallList
         width 100%
-        height (401/$rem)
+        height (421/$rem)
         display flex
+        background #fff
         .smallList_items
           display flex
           li
@@ -475,19 +419,21 @@
             width (575/$rem)
             height (320/$rem)
           .items_title
-            font-size (30/$rem)
+            font-size (27/$rem)
+            width (410/$rem)
             display inline-block
             float left
             white-space nowrap
             overflow hidden
             text-overflow ellipsis
-            padding 10px 0
+            margin 10px 0
           .items_price
             font-size (30/$rem)
             color #b4282d
             float right
           .items_content
-            font-size (27/$rem)
+            width (575/$rem)
+            font-size (25/$rem)
             color #7F7F7F
             float left
     .home_icon
@@ -502,21 +448,23 @@
       width 100%
       height 100%
       background #fff
+      margin-top 30px
       .footer_title
         width 100%
         height (120/$rem)
         font-size (35/$rem)
         text-align center
         line-height (120/$rem)
-
       .footer_list
         width 100%
+        clearFix()
         .footer_list_items
           width 46%
           float left
           margin 15px
           img
             width 100%
+            height (345/$rem)
             background #f4f4f4
             display block
             border-radius (7/$rem)
@@ -527,6 +475,9 @@
             width 100%
             padding 20px
             border-radius (7/$rem)
+            white-space nowrap
+            overflow hidden
+            text-overflow ellipsis
           .footer_list_content
             font-size (30/$rem)
             white-space nowrap
@@ -538,4 +489,34 @@
             font-size (30/$rem)
             color #b4282d
 
+    .home_footer
+      width 100%
+      height (245/$rem)
+      background #414141
+      margin-bottom (98/$rem)
+      .footer_lists
+        width 10rem
+        padding (56.25/$rem) (20/$rem) (28/$rem)
+        .footer_items
+          font-size (25/$rem)
+          color #fff
+          text-align center
+          line-height (62/$rem)
+          .footer_items_app
+            width (172/$rem)
+            height (62/$rem)
+            display inline-block
+            border 1px #999 solid
+            margin-right (50/$rem)
+          .footer_items_comp
+            border 1px #999 solid
+            width (172/$rem)
+            height (62/$rem)
+            display inline-block
+        .footer_since
+          font-size (25/$rem)
+          color #999
+          line-height (32/$rem)
+          text-align center
+          margin-top (36/$rem)
 </style>

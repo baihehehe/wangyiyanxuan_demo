@@ -16,7 +16,7 @@
         </div>
         <div class="login_type_pwd">
           <input type="text" placeholder="验证码">
-          <div class="type_pwd_test">发送验证码</div>
+          <button :disabled="times > 0" class="type_pwd_test" @click.prevent="sendCapt">{{times > 0 ? `已发送${times}s`:'发送验证码'}}</button>
         </div>
         <div class="login_test">
           温馨提示：未注册网易严选帐号的手机号，登录时将自动注册，且代表已同意
@@ -35,6 +35,28 @@
 <script>
   export default {
 
+    data () {
+      return {
+        times: 0  //倒计时初始值
+      }
+    },
+
+    methods: {
+
+      sendCapt () {
+        this.times = 30
+        const intervalId = setInterval(() => {
+
+          if (this.times === 0) {
+            clearInterval(intervalId)
+            return
+          }
+
+          this.times--
+        },1000)
+
+      }
+    }
   }
 </script>
 

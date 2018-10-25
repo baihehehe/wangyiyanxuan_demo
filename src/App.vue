@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <router-view/>
+    <!--缓存路由组建对象-->
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
     <!--底部导航-->
-    <FooterNav/>
+    <FooterNav v-show="$route.meta.isShowFooterNav"/>
   </div>
 </template>
 

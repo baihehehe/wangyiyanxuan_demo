@@ -16,9 +16,9 @@
         </div>
         <div class="login_type_pwd">
           <input type="text" placeholder="密码">
-          <div class="switch_button off">
-            <div class="switch_circle"></div>
-            <span class="switch_text">...</span>
+          <div class="switch_button" @click="isShowPwd = !isShowPwd" :class="{ on: isShowPwd}">
+            <div class="switch_circle" :class="{right : isShowPwd}"></div>
+            <span class="switch_text">pwd</span>
           </div>
         </div>
         <div class="login_type_captcha">
@@ -37,6 +37,12 @@
 
 <script>
   export default {
+
+    data () {
+      return {
+        isShowPwd: false  //密码显示/隐藏
+      }
+    }
 
   }
 </script>
@@ -125,6 +131,8 @@
               background #fff
               box-shadow 0 2px 4px 0 rgba(0,0,0,.1)
               transition transform .3s
+              &.right
+                transform translateX(40px)
         .login_type_captcha
           input
             font-size 0.4rem

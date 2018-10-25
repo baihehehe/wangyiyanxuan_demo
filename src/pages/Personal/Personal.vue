@@ -17,6 +17,28 @@
         </div>
       </div>
       <span class="login_phone_test">手机号快捷注册 ></span>
+      <div class="login_footer">
+        <div class="footer_list">
+          <div class="footerList_items">
+            <span class="footerItems_icon">
+              <i class="iconfont icon-zhihu-circle-fill"></i>
+            </span>
+            <div class="footerItems_test">知乎</div>
+          </div>
+          <div  class="footerList_items">
+            <span class="footerItems_icon">
+              <i class="iconfont icon-alipay-square-fill"></i>
+            </span>
+            <div class="footerItems_test">支付宝</div>
+          </div>
+          <div class="footerList_items last">
+            <span class="footerItems_icon">
+              <i class="iconfont icon-weibo-circle-fill"></i>
+            </span>
+            <div class="footerItems_test">微博</div>
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -38,9 +60,13 @@
     background #F4F4F4
     .login_content
       width 100%
-      height 100%
+      height (624/$rem)
       position relative
+      clearFix()
       .content_img
+        width 100%
+        height 100%
+        clearFix()
         img
           width (268/$rem)
           height (90/$rem)
@@ -48,12 +74,11 @@
           top (170/$rem)
           left 50%
           margin-left (-134/$rem)
-
-
       .content_loginType
         position absolute
         top (427/$rem)
         left (40/$rem)
+        clearFix()
         .loginType_test
           width (673/$rem)
           height (96/$rem)
@@ -82,6 +107,31 @@
       font-size (28/$rem)
       color #333
       width 100%
-      line-height 18.8rem
+      display block
+      padding-top (50/$rem)
       margin-left (250/$rem)
+    .login_footer
+      width 100%
+      height (74.4/$rem)
+      position absolute
+      bottom (70/$rem)
+      .footer_list
+        width 100%
+        text-align center
+        .footerList_items
+          font-size (27/$rem)
+          color #7F7F7F
+          display inline-block
+          padding 0 (20/$rem)
+          border-right 1px solid #979797
+          .footerItems_icon
+            display inline-block
+            i
+              font-size (42/$rem)
+              vertical-align middle
+          .footerItems_test
+            display inline-block
+
+        .last
+          border-right 0
 </style>
